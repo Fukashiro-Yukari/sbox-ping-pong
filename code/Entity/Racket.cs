@@ -12,7 +12,6 @@ public partial class Racket : Prop
 
         SetModel("models/citizen_props/concreteroaddivider01.vmdl");
         SetupPhysicsFromModel(PhysicsMotionType.Static);
-        RenderColor = Color32.White;
         Scale = 0.4f;
 
         game = Game.Current as PingPong;
