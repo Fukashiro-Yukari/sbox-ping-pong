@@ -2,35 +2,35 @@ using Sandbox;
 
 public partial class Goal : AnimEntity
 {
-    private PingPong game;
-    public PingPongPlayer Player;
+	private PingPong game;
+	public PingPongPlayer Player;
 
-    public override void Spawn()
-    {
-        base.Spawn();
+	public override void Spawn()
+	{
+		base.Spawn();
 
-        SetModel("models/room.vmdl");
-        SetupPhysicsFromModel(PhysicsMotionType.Static);
+		SetModel( "models/room.vmdl" );
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-        EnableAllCollisions = false;
-        EnableDrawing = false;
-        EnableTouch = true;
-        EnableTouchPersists = true;
+		EnableAllCollisions = false;
+		EnableDrawing = false;
+		EnableTouch = true;
+		EnableTouchPersists = true;
 
-        game = Game.Current as PingPong;
-    }
+		game = Game.Current as PingPong;
+	}
 
-    public override void StartTouch(Entity ent)
-    {
-        if (Player == null || !(ent is Ball ball) || !game.IsStart) return;
-        if (ball.IsDeath) return;
+	public override void StartTouch( Entity ent )
+	{
+		if ( Player == null || !(ent is Ball ball) || !game.IsStart ) return;
+		if ( ball.IsDeath ) return;
 
-        ball.DeleteAsync(5);
-        ball.IsDeath = true;
+		ball.DeleteAsync( 5 );
+		ball.IsDeath = true;
 
-        Player.Score++;
+		Player.Score++;
 
-        game.StartPlayer = Player.PlayerID == 1 ? 2 : 1;
-        game.IsStart = false;
-    }
+		game.StartPlayer = Player.PlayerID == 1 ? 2 : 1;
+		game.IsStart = false;
+	}
 }

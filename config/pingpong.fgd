@@ -14,14 +14,6 @@
 ]
 
 //
-// PingPong
-//
-@PointClass base(BaseProperties_pingpong) = pingpong : ""
-[
-	enable_shadows(boolean) [ group="Render Properties" ] : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-]
-
-//
 // PingPongTable
 //
 @PointClass base(BaseProperties_pingpong) editormodel( "models/room.vmdl" ) model() = ent_table : ""

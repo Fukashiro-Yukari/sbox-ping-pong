@@ -4,11 +4,11 @@ using Sandbox.UI.Construct;
 
 public class Score : Panel
 {
-    public Label Label;
+	public Label Label;
 
-    public Score()
-    {
-    }
+	public Score()
+	{
+	}
 
 	public PlayerName CreatePlayerName( PingPongPlayer player )
 	{

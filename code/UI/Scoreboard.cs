@@ -1,5 +1,4 @@
-﻿
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.Hooks;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -11,7 +10,7 @@ namespace Sandbox.UI
 	public partial class PingPongScoreboard<T> : Panel where T : PingPongScoreboardEntry, new()
 	{
 		public Panel Canvas { get; protected set; }
-		Dictionary<int, T> Entries = new ();
+		Dictionary<int, T> Entries = new();
 
 		public Panel Header { get; protected set; }
 
@@ -42,7 +41,7 @@ namespace Sandbox.UI
 		}
 
 
-		protected virtual void AddHeader() 
+		protected virtual void AddHeader()
 		{
 			Header = Add.Panel( "header" );
 			Header.Add.Label( "Name", "name" );

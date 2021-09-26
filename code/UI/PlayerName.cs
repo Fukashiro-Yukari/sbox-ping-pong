@@ -4,11 +4,11 @@ using Sandbox.UI.Construct;
 
 public class PlayerName : Panel
 {
-    public Label Label;
-    public Label Health;
-    public Image Avatar;
-    public PingPongPlayer Player;
-    public bool IsDelete;
+	public Label Label;
+	public Label Health;
+	public Image Avatar;
+	public PingPongPlayer Player;
+	public bool IsDelete;
 
 	public PlayerName( PingPongPlayer player )
 	{
