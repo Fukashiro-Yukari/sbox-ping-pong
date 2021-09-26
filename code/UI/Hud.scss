@@ -9,59 +9,45 @@ rootpanel
 Score
 {
     position: absolute;
-    left: 500px;
-	right: 500px;
-	top: 5px;
-    font-size: 150px;
-	font-weight: bold;
-	text-shadow: 4px 4px 10px rgba( black, 0.3 );
-	color: white;
+    left: 100px;
+	right: 100px;
+    top: 10px;
     background-color: rgba( #222, 0.95 );
     border-radius: 10px;
     align-items: center;
 	justify-content: center;
 
+    .Score
+    {
+        padding: 10px;
+        font-size: 150px;
+        font-weight: bold;
+        text-shadow: 4px 4px 10px rgba( black, 0.3 );
+        color: white;
+    }
+
     PlayerName
     {
+        padding: 15px;
         font-family: Poppins;
-        position: absolute;
         font-weight: 500;
-        bottom: 5px;
+        margin-bottom: 5px;
         color: white;
         font-size: 20px;
         align-items: center;
 		justify-content: center;
         flex-direction: column-reverse;
 
+        .Health
+        {
+            font-size: 15px;
+        }
+
         image
         {
-            right: 10px;
-            bottom: 20px;
             width: 100px;
             height: 100px;
-            margin: 20px;
-            margin-right: 0px;
             border-radius: 100px;
-
-            &.playerone
-            {
-                right: 10px;
-            }
-
-            &.playertwe
-            {
-                left: 10px;
-            }
-        }
-
-        &.playerone
-        {
-            left: 10px;
-        }
-
-        &.playertwe
-        {
-            right: 10px;
         }
     }
 }

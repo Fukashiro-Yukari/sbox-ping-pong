@@ -10,36 +10,36 @@ public class PlayerName : Panel
     public PingPongPlayer Player;
     public bool IsDelete;
 
-    public PlayerName(PingPongPlayer player)
-    {
-        var client = player.GetClientOwner();
+	public PlayerName( PingPongPlayer player )
+	{
+		var client = player.GetClientOwner();
 
-        Health = Add.Label("", "value");
-        Label = Add.Label(client.Name, "value");
-        Avatar = Add.Image($"avatar:{client.SteamId}");
-        Player = player;
-    }
+		Health = Add.Label( "", "Health" );
+		Label = Add.Label( client.Name, "Name" );
+		Avatar = Add.Image( $"avatar:{client.SteamId}" );
+		Player = player;
+	}
 
-    public override void Tick()
-    {
-        if (Player == null) return;
-        if (Player.GetClientOwner() == null)
-        {
-            Delete(true);
-            IsDelete = true;
-            return;
-        }
+	public override void Tick()
+	{
+		if ( Player == null ) return;
+		if ( Player.GetClientOwner() == null )
+		{
+			Delete( true );
+			IsDelete = true;
+			return;
+		}
 
-        var game = Game.Current as PingPong;
+		var game = Game.Current as PingPong;
 
-        if (Player.Racket != null)
-            Health.Text = $"HP : {Player.Racket.Health:0}";
-        else
-            Health.Text = game.IsStart ? "HP: 0" : "";
+		if ( Player.Racket != null )
+			Health.Text = $"HP : {Player.Racket.Health:0}";
+		else
+			Health.Text = game.IsStart ? "HP: 0" : "";
 
-        if (Player.PlayerID == 1)
-            SetClass("playerone", true);
-        else if (Player.PlayerID == 2)
-            SetClass("playertwe", true);
-    }
+		if ( Player.PlayerID == 1 )
+			SetClass( "playerone", true );
+		else if ( Player.PlayerID == 2 )
+			SetClass( "playertwe", true );
+	}
 }
