@@ -12,7 +12,7 @@ public class Score : Panel
 
 	public PlayerName CreatePlayerName( PingPongPlayer player )
 	{
-		if ( player.GetClientOwner() == null ) return null;
+		if ( player.Client == null ) return null;
 
 		var plyn = new PlayerName( player );
 		plyn.Parent = this;

@@ -12,7 +12,7 @@ public class PlayerName : Panel
 
 	public PlayerName( PingPongPlayer player )
 	{
-		var client = player.GetClientOwner();
+		var client = player.Client;
 
 		Health = Add.Label( "", "Health" );
 		Label = Add.Label( client.Name, "Name" );
@@ -23,7 +23,7 @@ public class PlayerName : Panel
 	public override void Tick()
 	{
 		if ( Player == null ) return;
-		if ( Player.GetClientOwner() == null )
+		if ( Player.Client == null )
 		{
 			Delete( true );
 			IsDelete = true;
