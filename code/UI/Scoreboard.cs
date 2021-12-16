@@ -4,13 +4,14 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sandbox.UI
 {
 	public partial class PingPongScoreboard<T> : Panel where T : PingPongScoreboardEntry, new()
 	{
 		public Panel Canvas { get; protected set; }
-		Dictionary<int, T> Entries = new();
+		Dictionary<Client, T> Rows = new();
 
 		public Panel Header { get; protected set; }
 
@@ -22,15 +23,6 @@ namespace Sandbox.UI
 			AddHeader();
 
 			Canvas = Add.Panel( "canvas" );
-
-			PlayerScore.OnPlayerAdded += AddPlayer;
-			PlayerScore.OnPlayerUpdated += UpdatePlayer;
-			PlayerScore.OnPlayerRemoved += RemovePlayer;
-
-			foreach ( var player in PlayerScore.All )
-			{
-				AddPlayer( player );
-			}
 		}
 
 		public override void Tick()
@@ -38,8 +30,28 @@ namespace Sandbox.UI
 			base.Tick();
 
 			SetClass( "open", Input.Down( InputButton.Score ) );
-		}
 
+			if ( !IsVisible )
+				return;
+
+			//
+			// Clients that were added
+			//
+			foreach ( var client in Client.All.Except( Rows.Keys ) )
+			{
+				var entry = AddClient( client );
+				Rows[client] = entry;
+			}
+
+			foreach ( var client in Rows.Keys.Except( Client.All ) )
+			{
+				if ( Rows.TryGetValue( client, out var row ) )
+				{
+					row?.Delete();
+					Rows.Remove( client );
+				}
+			}
+		}
 
 		protected virtual void AddHeader()
 		{
@@ -48,29 +60,11 @@ namespace Sandbox.UI
 			Header.Add.Label( "Ping", "ping" );
 		}
 
-		protected virtual void AddPlayer( PlayerScore.Entry entry )
+		protected virtual T AddClient( Client entry )
 		{
 			var p = Canvas.AddChild<T>();
-			p.UpdateFrom( entry );
-
-			Entries[entry.Id] = p;
-		}
-
-		protected virtual void UpdatePlayer( PlayerScore.Entry entry )
-		{
-			if ( Entries.TryGetValue( entry.Id, out var panel ) )
-			{
-				panel.UpdateFrom( entry );
-			}
-		}
-
-		protected virtual void RemovePlayer( PlayerScore.Entry entry )
-		{
-			if ( Entries.TryGetValue( entry.Id, out var panel ) )
-			{
-				panel.Delete();
-				Entries.Remove( entry.Id );
-			}
+			p.Client = entry;
+			return p;
 		}
 	}
 }

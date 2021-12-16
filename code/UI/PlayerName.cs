@@ -16,7 +16,7 @@ public class PlayerName : Panel
 
 		Health = Add.Label( "", "Health" );
 		Label = Add.Label( client.Name, "Name" );
-		Avatar = Add.Image( $"avatar:{client.SteamId}" );
+		Avatar = Add.Image( $"avatar:{client.PlayerId}" );
 		Player = player;
 	}
 

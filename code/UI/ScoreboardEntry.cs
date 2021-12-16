@@ -9,7 +9,7 @@ namespace Sandbox.UI
 {
 	public partial class PingPongScoreboardEntry : Panel
 	{
-		public PlayerScore.Entry Entry;
+		public Client Client;
 
 		public Label PlayerName;
 		public Label Ping;
@@ -22,14 +22,36 @@ namespace Sandbox.UI
 			Ping = Add.Label( "", "ping" );
 		}
 
-		public virtual void UpdateFrom( PlayerScore.Entry entry )
+		RealTimeSince TimeSinceUpdate = 0;
+
+		public override void Tick()
 		{
-			Entry = entry;
+			base.Tick();
 
-			PlayerName.Text = entry.GetString( "name" );
-			Ping.Text = entry.Get<int>( "ping", 0 ).ToString();
+			if ( !IsVisible )
+				return;
 
-			SetClass( "me", Local.Client != null && entry.Get<ulong>( "steamid", 0 ) == Local.Client.SteamId );
+			if ( !Client.IsValid() )
+				return;
+
+			if ( TimeSinceUpdate < 0.1f )
+				return;
+
+			TimeSinceUpdate = 0;
+			UpdateData();
+		}
+
+		public virtual void UpdateData()
+		{
+			PlayerName.Text = Client.Name;
+			Ping.Text = Client.Ping.ToString();
+			SetClass( "me", Client == Local.Client );
+		}
+
+		public virtual void UpdateFrom( Client client )
+		{
+			Client = client;
+			UpdateData();
 		}
 	}
 }

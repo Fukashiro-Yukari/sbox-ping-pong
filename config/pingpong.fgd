@@ -16,7 +16,7 @@
 //
 // PingPongTable
 //
-@PointClass base(BaseProperties_pingpong) editormodel( "models/room.vmdl" ) model() = ent_table : ""
+@PointClass base(BaseProperties_pingpong) tags( Physics ) editormodel( "models/room.vmdl" ) model() = ent_table : ""
 [
 	model(resource:vmdl) { report = true hide_when_solid = true }: "World Model" : "" : "The model this entity should use."
 	skin(materialgroup) { group = "Rendering" hide_when_solid = true } : "Skin" : "default" : "Some models have multiple versions of their textures, called skins." 
@@ -31,6 +31,7 @@
 		5 : "COLLISION GROUP DEBRIS"
 		14 : "COLLISION GROUP WEAPON"
 	]
+	static(boolean) : "Static" : 0 : "If set, the prop will spawn with motion disabled and will act as a nav blocker until broken."
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
 	input Break(void) : "Causes this prop to break, regardless if it is actually breakable or not. (i.e. ignores health and whether the model has gibs)"
